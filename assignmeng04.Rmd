@@ -1,0 +1,46 @@
+---
+title: "Assignment04"
+author: "Qi Xue - qx61"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("sf")
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r Import data, echo = FALSE}
+
+project <- read_csv("projects.csv")
+locations <- read_csv("locations.csv")
+ancillary <- read_csv("projects_ancillary.csv")
+```
+
+## Data source
+
+[data](https://www.aiddata.org/data/world-bank-geocoded-research-release-level-1-v1-4-2).
+
+# Graph 1 - 
+```{r graph 1}
+project %>% 
+  ggplot (aes(x = total_commitments,)) +
+  geom_bar()
+```
+
+## Including Plots
+
+```{r graph 2}
+library(sf)
+library(tigris)
+st_as_sf(locations, coords = c("longitude", "latitude"))
+```
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
