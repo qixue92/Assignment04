@@ -60,11 +60,16 @@ project %>%
    summarize(n_m_total_commitments = sum(m_total_commitments), na.rm = TRUE,
              n_m_total_disbursements = sum(m_total_disbursements), na.rm = TRUE) %>% 
    ggplot(aes(x = year)) +
-   geom_line(aes(y = n_m_total_disbursements), 
-             group = 1, color = "blue") +
-   geom_line(aes(y = n_m_total_commitments),
-             linetype = "dashed", color = "orange") +
+   geom_line(aes(y = n_m_total_disbursements, color = "Disbursements"),
+          group = 1,
+          show.legend = TRUE) +
+geom_line(aes(y = n_m_total_commitments, color = "Commitments"),
+          linetype = "dashed",
+          show.legend = TRUE) +
    theme_bw() +
+   scale_color_manual(name = "",
+                   values = c("Disbursements" = "blue",
+                              "Commitments" = "orange")) +
    scale_x_continuous(limits = c(1995, 2015),
                      breaks = c(1995, 2000, 2005, 2010, 2015)) +
    scale_y_continuous(limits = c(0, NA)) +
@@ -75,7 +80,7 @@ project %>%
       caption = "\nData Source: AidData | World Bank Geocoded Research Release")
 ggsave(filename = "commitments_gap.png")
 ```
-This line graph intends to see the gap between project commitments and disbursements. We would be interested know how the World Bank is balancing of its project budget. Further, we could learn more about when and where projects experience with the largest gaps in funding. However, due to some issues, the disbursements line cannot be shown, limiting our ability to make conclusions or inference.
+This line graph intends to see the gap between project commitments and disbursements. We would be interested know how the World Bank is balancing of its project budget. Further, we could learn more about when and where projects experience with the largest gaps in funding. Before 2005, the reimbursement could roughly meet the commitments. Yet, project commitments and disbursement began to diverge in 2008, resulting in an enlarging gap.
 
 
 # Graph 3 - Top projects destinations
